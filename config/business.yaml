@@ -1,0 +1,25 @@
+# Configuración del negocio — Generado por AgentKit
+negocio:
+  nombre: "Lavadero PITA"
+  descripcion: >
+    Lavadero y gomería. Servicios de lavado para motos, autos y camionetas:
+    lavado simple, encerado, pulido, aspirado y lavado de motor. Además ofrece
+    servicios de gomería: reparación de pinchaduras, cambio de cubiertas y venta
+    de cubiertas.
+  horario: "Lunes a Sábados de 9:00 a 20:00 hs (horario de invierno; puede variar en verano)"
+
+agente:
+  nombre: "VIP"
+  tono: "Profesional pero cercano, amigable y cálido, con un toque vendedor cuando sea oportuno"
+  casos_de_uso:
+    - "Responder preguntas frecuentes"
+    - "Agendar turnos de atención"
+    - "Calificar y atender leads / ventas"
+    - "Informar cuándo se cierra por mal tiempo"
+
+metadata:
+  creado: "2026-06-27"
+  version: "1.0"
+  # Plataforma / empresa desarrolladora del producto (tu marca)
+  desarrollado_por: "VM — Virtual Machine"
+  plataforma: "VM Virtual Machine — Agentes de WhatsApp con IA"
