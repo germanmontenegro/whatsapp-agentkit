@@ -74,8 +74,13 @@ async def webhook_handler(request: Request):
     Procesa el mensaje, genera respuesta con Claude y la envía de vuelta.
     """
     try:
+        # --- DIAGNÓSTICO TEMPORAL: registrar lo que llega crudo ---
+        raw_body = await request.body()
+        logger.info(f">>> DIAG webhook recibido | content-type={request.headers.get('content-type')} | body={raw_body[:600]}")
+
         # Parsear webhook — el proveedor normaliza el formato
         mensajes = await proveedor.parsear_webhook(request)
+        logger.info(f">>> DIAG mensajes parseados: {len(mensajes)}")
 
         for msg in mensajes:
             # Ignorar mensajes propios o vacíos
@@ -96,7 +101,8 @@ async def webhook_handler(request: Request):
             await guardar_mensaje(msg.telefono, "assistant", respuesta)
 
             # Enviar respuesta por WhatsApp via el proveedor
-            await proveedor.enviar_mensaje(msg.telefono, respuesta)
+            enviado = await proveedor.enviar_mensaje(msg.telefono, respuesta)
+            logger.info(f">>> DIAG envio a {msg.telefono} exitoso={enviado}")
 
             logger.info(f"Respuesta a {msg.telefono}: {respuesta}")
 
