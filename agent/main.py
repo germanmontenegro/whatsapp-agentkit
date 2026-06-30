@@ -25,6 +25,11 @@ log_level = logging.DEBUG if ENVIRONMENT == "development" else logging.INFO
 logging.basicConfig(level=log_level)
 logger = logging.getLogger("agentkit")
 
+# Silenciar el ruido de las librerías de terceros para que los logs sean legibles.
+# (aiosqlite, httpx, etc. generan miles de líneas DEBUG que tapan lo importante)
+for ruidoso in ("aiosqlite", "httpx", "httpcore", "anthropic", "sqlalchemy.engine"):
+    logging.getLogger(ruidoso).setLevel(logging.WARNING)
+
 # Proveedor de WhatsApp (se configura en .env con WHATSAPP_PROVIDER)
 proveedor = obtener_proveedor()
 PORT = int(os.getenv("PORT", 8000))
